@@ -1,0 +1,12 @@
+- Calculate median rating
+- Calculate ratio against median rating
+- Stake value applied based on how much difference in rating.Lower rated wins more, loses less. Higher wins less, loses more.
+    - Within 100 points: 40
+    - Within 200 points: 30, 50
+    - Within 400 points: 20, 60
+    - Within 600 points: 10, 70
+    - Within 800 points: 5, 80
+    - Within 1000 points: 5, 100
+- Assign polarity based on outcome
+    - Winner is +1, loser is -1
+    - In case of a draw, polarity becomes 0.5. Positive value assigned to the player with the lower rating
