@@ -61,3 +61,28 @@ class Match:
     def setScore(self, x, y):
         self.matchInformation['player1']['playerScore'] = x
         self.matchInformation['player2']['playerScore'] = y
+            
+    def findBottom(self):
+        
+        if (self.matchInformation['player1']['playerRating'] == self.matchInformation['player1']['playerRating']): 
+            return "Tie"
+        
+        if (self.matchInformation['player1']['playerRating'] < self.matchInformation['player1']['playerRating']):
+            return self.matchPlayers['player1']
+        else: return self.matchPlayers['player2']
+        
+    def winner(self):
+        
+        # if (self.matchInformation['player1']['playerScore'] == self.matchInformation['player1']['playerScore']): 
+        #     return "Tie", "Tie"
+        
+        if (self.matchInformation['player1']['playerScore'] > self.matchInformation['player2']['playerScore']):
+            print(f"The winner is {self.matchPlayers['player1']['playerObject'].playerData['playerName']}")
+            return self.matchPlayers['player1']['playerObject']
+        else: return self.matchPlayers['player2']
+        
+    def setPolarity(self):
+        
+        if (self.winner() == self.matchPlayers['player1']['playerObject']): 
+            self.matchAnalytics['player1']['polarity'] = 1
+            self.matchAnalytics['player2']['polarity'] = -1
