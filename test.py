@@ -11,6 +11,6 @@ mx.winner()
 mx.setPolarity()
 
 # one = mx.returnOnePlus()
-print(f"{mx.matchAnalytics['player1']['polarity']}")
+
 # print(one)
 
