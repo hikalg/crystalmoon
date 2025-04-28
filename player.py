@@ -1,12 +1,14 @@
 class Player:
     playerData = {
-        "playerName": "unknown",
-        "playerRating": 1000.00
+        
     }
-    
+
     # Initialises player object
-    def __init__(self, playerName):
-        self.playerData['playerName'] = playerName
+    def __init__(self, playerName: str):
+        self.playerData = {
+            "playerName": str,
+            "playerRating": 1000,
+        }
         
     # String format of object
     def __str__(self):

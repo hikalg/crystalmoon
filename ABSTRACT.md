@@ -1,6 +1,6 @@
 - Calculate median rating
 - Calculate ratio against median rating
-- Stake value applied based on how much difference in rating.Lower rated wins more, loses less. Higher wins less, loses more.
+- Stake value applied based on how much difference in rating. Lower rated wins more, loses less. Higher wins less, loses more.
     - Within 100 points: 40
     - Within 200 points: 30, 50
     - Within 400 points: 20, 60

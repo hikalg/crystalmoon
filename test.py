@@ -2,14 +2,18 @@ import player as p
 import match as m
 
 p1 = p.Player("musket")
-p1.adjustRating(1500)
 p2 = p.Player("rifle")
-p2.adjustRating(800)
+
+p1.setRating(1500)
+p2.setRating(800)
 mx = m.Match(p1, p2)
-mx.setScore(2, 0)
+mx.setScore(4, 4)
 mx.setPolarity()
+a = mx.calculateBaseChange()
 
 
-
-print(mx.matchAnalytics['player1']['polarity'])
-
+print(f"{mx.matchAnalytics['player1']['polarity']}")
+print(a)
+print(mx.matchPlayers['player1']['playerRating'])
+print(mx.matchPlayers['player2']['playerRating'])
+print(p1.playerData['playerRating'])

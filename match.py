@@ -16,32 +16,35 @@ class Match:
     
     matchInformation = {
         "player1" : {
-            "playerRating" : matchPlayers["player1"]["playerRating"],
             "playerScore" : 0,
+            "playerPerformance" : 0,
         },
         
         "player2" : {
-            "playerRating" : matchPlayers["player2"]["playerRating"],
             "playerScore" : 0,
+            "playerPerformance" : 0,
         }
     }
     
     matchAnalytics = {
         
         "player1" : {
-            "playerRating" : matchPlayers["player1"]["playerRating"],
-            "playerScore" : matchInformation["player1"]["playerScore"],
+
             "baseChange" : 0,
             "polarity": 0,
-            
+            "ratioToMedian": 0,
         },
         
         "player2" : {
-            "playerRating" : matchPlayers["player2"]["playerRating"],
-            "playerScore" : matchInformation["player2"]["playerScore"],
+
             "baseChange" : 0,
             "polarity": 0,
+            "ratioToMedian": 0,
         },
+    }
+    
+    matchAnalyticsGeneral = {
+        "averageRating" : 0,
     }
     
     
@@ -73,16 +76,63 @@ class Match:
         
     def winner(self):
         
-        if (self.matchInformation['player1']['playerScore'] == self.matchInformation['player1']['playerScore']): 
-            return "Tie"
-        
-        if (self.matchInformation['player1']['playerScore'] > self.matchInformation['player2']['playerScore']):
-            print(f"The winner is {self.matchPlayers['player1']['playerObject'].playerData['playerName']}")
-            return self.matchPlayers['player1']
-        else: return self.matchPlayers['player2']
+        scoreOne = self.matchInformation['player1']['playerScore']
+        scoreTwo = self.matchInformation['player2']['playerScore']
+        if (scoreOne > scoreTwo): return self.matchPlayers['player1']
+        elif (scoreOne < scoreTwo): return self.matchPlayers['player2']
+        elif (scoreOne == scoreTwo): return "Tie"
+        else: return 0
+                
         
     def setPolarity(self):
+        playerOne = self.matchPlayers['player1']
+        playerTwo = self.matchPlayers['player2']
         
-        if (self.winner() == self.matchPlayers['player1']): 
+        ratingOne = self.matchPlayers['player1']['playerRating']
+        ratingTwo = self.matchPlayers['player2']['playerRating']
+        
+        if (self.winner() == playerOne): 
             self.matchAnalytics['player1']['polarity'] = 1
             self.matchAnalytics['player2']['polarity'] = -1
+            
+        if (self.winner() == playerTwo): 
+            self.matchAnalytics['player1']['polarity'] = -1
+            self.matchAnalytics['player2']['polarity'] = 1
+            
+        if (self.winner() == "Tie"):
+            
+            if (ratingOne > ratingTwo):
+                self.matchAnalytics['player1']['polarity'] = -0.5
+                self.matchAnalytics['player2']['polarity'] = 0.5
+                
+            if (ratingOne < ratingTwo):
+                self.matchAnalytics['player1']['polarity'] = 0.5
+                self.matchAnalytics['player2']['polarity'] = -0.5
+                
+            if (ratingOne == ratingTwo):
+                self.matchAnalytics['player1']['polarity'] = 0.25
+                self.matchAnalytics['player2']['polarity'] = 0.25
+            
+    def calculateRatio(self):
+        
+        ratingOne = self.matchPlayers['player1']['playerRating']
+        ratingTwo = self.matchPlayers['player2']['playerRating']
+        ratingAvg = (ratingOne + ratingTwo) / 2
+        
+        self.matchAnalytics['player1']['ratioToMedian'] = ratingOne / ratingAvg
+        self.matchAnalytics['player2']['ratioToMedian'] = ratingTwo / ratingAvg
+        
+    def calculateBaseChange(self):
+        
+        playerOne = self.matchPlayers['player1']
+        playerTwo = self.matchPlayers['player2']
+        
+        ratingOne = self.matchPlayers['player1']['playerRating']
+        ratingTwo = self.matchPlayers['player2']['playerRating']
+        ratingDifference = ratingOne - ratingTwo
+        
+        if (ratingDifference <= 100):
+            return 1
+        elif (ratingDifference > 100 and ratingDifference <= 200):
+            return 2
+        else: return 3
