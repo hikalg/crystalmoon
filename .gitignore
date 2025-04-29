@@ -1,4 +1,5 @@
 # Ignore test environments
-/testEnv
+testEnv
 test.py
-__pycache__/match.cpython-313.pyc
+__pycache__
+__pycache__
