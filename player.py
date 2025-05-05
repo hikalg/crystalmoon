@@ -6,7 +6,7 @@ class Player:
     # Initialises player object
     def __init__(self, playerName: str):
         self.playerData = {
-            "playerName": str,
+            "playerName": playerName,
             "playerRating": 1000,
         }
         
